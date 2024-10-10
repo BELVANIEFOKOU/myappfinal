@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:myappfinal/search.dart';
 import 'package:myappfinal/publishPage.dart';
 import 'package:myappfinal/signInPage.dart';
 import 'package:myappfinal/signUpPage.dart';
 
 class Slider extends StatefulWidget {
-  const Slider({Key? key}) : super(key: key);
+  const Slider({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SliderState createState() => _SliderState();
 }
 
@@ -17,7 +17,7 @@ class _SliderState extends State<Slider> {
   final List<Widget> _pages = [
     SignUpPage(), // Replace HomeContent with your actual home page content
     SignInPage(),
-    PublishPage(),
+    const PublishPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -30,13 +30,13 @@ class _SliderState extends State<Slider> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recherche Immobilière'),
+        title: const Text('Recherche Immobilière'),
       ),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
@@ -60,7 +60,7 @@ class _SliderState extends State<Slider> {
             });
           }
         },
-        child: Icon(Icons.arrow_forward_ios),
+        child: const Icon(Icons.arrow_forward_ios),
       ),
     );
   }

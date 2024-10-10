@@ -4,6 +4,8 @@ import 'package:myappfinal/services/auth_service.dart';
 
 class SignUpPage extends StatefulWidget {
   final AuthService _authService = AuthService();
+
+  SignUpPage({super.key});
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -13,14 +15,7 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       bool success = await widget._authService.signUp(
-          nom!,
-          emailCompte!,
-          mdpCompte!,
-          telephone!,
-          TypeCompte!,
-          villeAgent!,
-          businessRegistrationNumber!,
-          cniAgent!);
+          nom!, emailCompte!, mdpCompte!, telephone!, TypeCompte!, villeAgent!, businessRegistrationNumber!, cniAgent!);
 
       if (success) {
         // Navigate to the next page
@@ -31,29 +26,16 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
       } else {
         // Show an error message
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Échec de l\'inscription')),
+          const SnackBar(content: Text('Échec de l\'inscription')),
         );
       }
     }
   }
 
   final _formKey = GlobalKey<FormState>();
-  String? nom,
-      emailCompte,
-      mdpCompte,
-      telephone,
-      TypeCompte,
-      villeAgent,
-      businessRegistrationNumber,
-      cniAgent;
+  String? nom, emailCompte, mdpCompte, telephone, TypeCompte, villeAgent, businessRegistrationNumber, cniAgent;
   List<String> userTypes = ['Particulier', 'Professionnel', 'Entreprise'];
-  List<String> cities = [
-    'Yaoundé',
-    'Douala',
-    'Bafoussam',
-    'Maroua',
-    'Nkongsamba'
-  ];
+  List<String> cities = ['Yaoundé', 'Douala', 'Bafoussam', 'Maroua', 'Nkongsamba'];
   late List<AnimationController> _controllers;
   late List<Animation<Offset>> _animations;
   late AnimationController _welcomeTextController;
@@ -70,14 +52,14 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
       5,
       (index) => AnimationController(
         vsync: this,
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       ),
     );
 
     _animations = List.generate(
       5,
       (index) => Tween<Offset>(
-        begin: index.isEven ? Offset(-1, 0) : Offset(1, 0),
+        begin: index.isEven ? const Offset(-1, 0) : const Offset(1, 0),
         end: Offset.zero,
       ).animate(CurvedAnimation(
         parent: _controllers[index],
@@ -91,7 +73,7 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
 
     _welcomeTextController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 7),
+      duration: const Duration(seconds: 7),
     );
 
     _welcomeTextAnimation = CurvedAnimation(
@@ -117,12 +99,11 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
       suffixIcon: Icon(icon),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15.0),
-        borderSide:
-            BorderSide(color: Color.fromARGB(255, 255, 98, 0), width: 2.0),
+        borderSide: const BorderSide(color: Color.fromARGB(255, 255, 98, 0), width: 2.0),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(25.0),
-        borderSide: BorderSide(width: 0.5),
+        borderSide: const BorderSide(width: 0.5),
       ),
       filled: true,
       fillColor: Colors.white,
@@ -133,7 +114,7 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Créer votre compte',
           style: TextStyle(
             color: Colors.white,
@@ -141,11 +122,11 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
             fontSize: 30,
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 255, 98, 0),
+        backgroundColor: const Color.fromARGB(255, 255, 98, 0),
       ),
       body: Center(
         child: SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
             child: Column(
               children: [
@@ -163,7 +144,7 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
   Widget _buildWelcomeText() {
     return FadeTransition(
       opacity: _welcomeTextAnimation,
-      child: Padding(
+      child: const Padding(
         padding: EdgeInsets.only(bottom: 24),
         child: Text(
           "Bienvenue sur MonPiol237 ! ",
@@ -186,33 +167,34 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           _buildAnimatedFormField(
-              0, 'Nom', Icons.person,
-              (value) {
-             telephone = value;
+            0,
+            'Nom',
+            Icons.person,
+            (value) {
+              telephone = value;
               if (value != null && value.length < 8) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('le nom   ne doit pas etre vide')),
+                  const SnackBar(content: Text('le nom   ne doit pas etre vide')),
                 );
               }
-            },),
-          SizedBox(height: 16),
+            },
+          ),
+          const SizedBox(height: 16),
           _buildAnimatedFormField(
             1,
             'Email',
             Icons.email,
             (value) {
               emailCompte = value;
-              if (value != null &&
-                  !RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-                      .hasMatch(value)) {
+              if (value != null && !RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$').hasMatch(value)) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Adresse email invalide')),
+                  const SnackBar(content: Text('Adresse email invalide')),
                 );
               }
             },
             keyboardType: TextInputType.emailAddress,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           _buildAnimatedFormField(
             2,
             'Mot de passe',
@@ -221,43 +203,39 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
               mdpCompte = value;
               if (value != null && value.length < 8) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Mot de passe trop court')),
+                  const SnackBar(content: Text('Mot de passe trop court')),
                 );
               }
             },
             obscureText: true,
           ),
-          SizedBox(height: 16),
-         
-          _buildAnimatedFormField(
-              3, 'Téléphone', Icons.phone,  (value) {
-             telephone = value;
-              if (value != null && value.length < 8) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('numero de telephone  trop court')),
-                );
-              }
-            },
-              keyboardType: TextInputType.phone),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
+          _buildAnimatedFormField(3, 'Téléphone', Icons.phone, (value) {
+            telephone = value;
+            if (value != null && value.length < 8) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('numero de telephone  trop court')),
+              );
+            }
+          }, keyboardType: TextInputType.phone),
+          const SizedBox(height: 16),
           _buildUserTypeDropdown(),
           if (TypeCompte == 'Professionnel' || TypeCompte == 'Entreprise') ...[
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildCityDropdown(),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildBusinessRegistrationField(),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildcniperson()
           ],
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
           _buildSignUpButton(),
         ],
       ),
     );
   }
 
-  Widget _buildAnimatedFormField(
-      int index, String label, IconData icon, Function(String?) onSaved,
+  Widget _buildAnimatedFormField(int index, String label, IconData icon, Function(String?) onSaved,
       {TextInputType? keyboardType, bool obscureText = false}) {
     return SlideTransition(
       position: _animations[index],
@@ -309,49 +287,48 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
     );
   }
 
- Widget _buildcniperson() {
-  return TextFormField(
-    decoration: _inputDecoration('Numéro de cni', Icons.business),
-    onSaved: (value) => cniAgent = value,
-    validator: (value) {
-      if (value == null || value.isEmpty) {
-        return 'Numéro de CNI ne peut pas être vide';
-      }
-      // Add additional validation logic if needed
-      return null;
-    },
-  );
-}
+  Widget _buildcniperson() {
+    return TextFormField(
+      decoration: _inputDecoration('Numéro de cni', Icons.business),
+      onSaved: (value) => cniAgent = value,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Numéro de CNI ne peut pas être vide';
+        }
+        // Add additional validation logic if needed
+        return null;
+      },
+    );
+  }
 
-Widget _buildBusinessRegistrationField() {
-  return TextFormField(
-    decoration: _inputDecoration('Numéro de registre du commerce', Icons.business),
-    onSaved: (value) => businessRegistrationNumber = value,
-    validator: (value) {
-      if (value == null || value.isEmpty) {
-        return 'Numéro de registre du commerce ne peut pas être vide';
-      }
-      // Add additional validation logic if needed
-      return null;
-    },
-  );
-}
+  Widget _buildBusinessRegistrationField() {
+    return TextFormField(
+      decoration: _inputDecoration('Numéro de registre du commerce', Icons.business),
+      onSaved: (value) => businessRegistrationNumber = value,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Numéro de registre du commerce ne peut pas être vide';
+        }
+        // Add additional validation logic if needed
+        return null;
+      },
+    );
+  }
 
   Widget _buildSignUpButton() {
     return ElevatedButton(
-      child: Text(
-        'S\'inscrire',
-        style: TextStyle(
-            fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
-      ),
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color.fromARGB(255, 255, 98, 0),
+        backgroundColor: const Color.fromARGB(255, 255, 98, 0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25.0),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
       ),
       onPressed: _handleSignUp,
+      child: Text(
+        'S\'inscrire',
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
+      ),
     );
   }
 
@@ -364,7 +341,7 @@ Widget _buildBusinessRegistrationField() {
           style: TextStyle(color: Colors.grey[600]),
         ),
         TextButton(
-          child: Text(
+          child: const Text(
             'Se connecter',
             style: TextStyle(
               color: Color.fromARGB(255, 255, 98, 0),

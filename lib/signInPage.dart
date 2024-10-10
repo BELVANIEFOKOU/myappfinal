@@ -9,6 +9,8 @@ class SignInPage extends StatefulWidget {
   // final GoogleSignIn _googleSignIn = GoogleSignIn();
   final AuthService _authService = AuthService();
 
+  SignInPage({super.key});
+
   @override
   _SignInPageState createState() => _SignInPageState();
 }
@@ -27,7 +29,7 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
       } else {
         // Show an error message
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Échec de la connexion')),
+          const SnackBar(content: Text('Échec de la connexion')),
         );
       }
     }
@@ -44,11 +46,11 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
     super.initState();
     _formController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     );
 
     _formAnimation = Tween<Offset>(
-      begin: Offset(0, 1),
+      begin: const Offset(0, 1),
       end: Offset.zero,
     ).animate(CurvedAnimation(
       parent: _formController,
@@ -81,15 +83,15 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
           : Icon(icon),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(25.0),
-        borderSide: BorderSide(width: 0.5),
+        borderSide: const BorderSide(width: 0.5),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(25.0),
-        borderSide: BorderSide(width: 0.5),
+        borderSide: const BorderSide(width: 0.5),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(25.0),
-        borderSide: BorderSide(width: 0.5),
+        borderSide: const BorderSide(width: 0.5),
       ),
       filled: true,
       fillColor: Colors.white,
@@ -120,17 +122,17 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Connexion'),
+        title: const Text('Connexion'),
       ),
       body: Center(
         child: SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.8,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text(
+                const Text(
                   'Comment souhaitez-vous vous connecter ?',
                   style: TextStyle(
                     fontSize: 18,
@@ -139,7 +141,7 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 SlideTransition(
                   position: _formAnimation,
                   child: Form(
@@ -152,15 +154,26 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
                           onSaved: (value) => emailCompte = value,
                           // validator: _validateEmail,
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         TextFormField(
                           decoration: _inputDecoration('Mot de passe', Icons.lock),
                           obscureText: _obscureText,
                           onSaved: (value) => mdpCompte = value,
                           // validator: _validatePassword,
                         ),
-                        SizedBox(height: 24),
+                        const SizedBox(height: 24),
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(255, 255, 98, 0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 50,
+                              vertical: 15,
+                            ),
+                          ),
+                          onPressed: _handleSignIn,
                           child: Text(
                             'Se connecter',
                             style: TextStyle(
@@ -169,28 +182,17 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
                               color: Colors.white,
                             ),
                           ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 255, 98, 0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 50,
-                              vertical: 15,
-                            ),
-                          ),
-                          onPressed: _handleSignIn,
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         ElevatedButton.icon(
                           icon: Image.network(
                             "https://imagepng.org/wp-content/uploads/2019/08/google-icon-1024x1024.png",
                             width: 20,
                             height: 20,
                           ),
-                          label: Text('Connectez-vous via Google'),
+                          label: const Text('Connectez-vous via Google'),
                           style: ElevatedButton.styleFrom(
-                            minimumSize: Size(
+                            minimumSize: const Size(
                               double.infinity,
                               50,
                             ),
@@ -208,11 +210,10 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
                             }
                           },
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         ElevatedButton(
-                          child: Text('S\'inscrire'),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 255, 98, 0),
+                            backgroundColor: const Color.fromARGB(255, 255, 98, 0),
                           ),
                           onPressed: () {
                             Navigator.push(
@@ -220,6 +221,7 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
                               MaterialPageRoute(builder: (context) => SignUpPage()),
                             );
                           },
+                          child: Text('S\'inscrire'),
                         ),
                       ],
                     ),
