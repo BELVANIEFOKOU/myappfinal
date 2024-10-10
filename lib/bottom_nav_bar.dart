@@ -5,16 +5,15 @@ import 'package:myappfinal/notifcation.dart';
 import 'package:myappfinal/search.dart';
 import 'package:myappfinal/signInPage.dart';
 
-
 class CustomBottomNavBar extends StatelessWidget {
   final int currentIndex;
 
-  CustomBottomNavBar({this.currentIndex = 0});
+  const CustomBottomNavBar({super.key, this.currentIndex = 0});
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      selectedItemColor: Color.fromARGB(255, 255, 98, 0),
+      selectedItemColor: const Color.fromARGB(255, 255, 98, 0),
       unselectedItemColor: Colors.black,
       currentIndex: currentIndex,
       onTap: (index) {
@@ -23,33 +22,29 @@ class CustomBottomNavBar extends StatelessWidget {
             context,
             MaterialPageRoute(builder: (context) => HomePage()),
           );
-        } 
-        else if (index == 1) {
+        } else if (index == 1) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => SearchPage()),
+            MaterialPageRoute(builder: (context) => const SearchPage()),
           );
-        }
-        else if (index == 2) {
+        } else if (index == 2) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => FavoritesPage()),
+            MaterialPageRoute(builder: (context) => const FavoritesPage()),
           );
-        }
-        else if (index == 3) {
+        } else if (index == 3) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => NotifcationPage()),
+            MaterialPageRoute(builder: (context) => const NotifcationPage()),
           );
-        }
-        else if (index == 4) {
+        } else if (index == 4) {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => SignInPage()),
           );
         }
       },
-      items: [
+      items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Accueil'),
         BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Recherche'),
         BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favoris'),

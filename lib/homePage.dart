@@ -1,10 +1,12 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:myappfinal/bottom_nav_bar.dart';
-import 'package:myappfinal/search.dart';
-import 'package:myappfinal/signInPage.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
 }
 
@@ -17,12 +19,12 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.menu, color: Color.fromARGB(255, 255, 98, 0)),
+          icon: const Icon(Icons.menu, color: Color.fromARGB(255, 255, 98, 0)),
           onPressed: () {
             // Action pour le menu hamburger
           },
         ),
-        title: Text('MonPiol237', style: TextStyle(color: Color.fromARGB(255, 255, 98, 0))),
+        title: const Text('MonPiol237', style: TextStyle(color: Color.fromARGB(255, 255, 98, 0))),
         backgroundColor: Colors.white,
         centerTitle: true,
         elevation: 0,
@@ -32,9 +34,9 @@ class _HomePageState extends State<HomePage> {
             child: Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: Color.fromARGB(255, 255, 98, 0), width: 2),
+                border: Border.all(color: const Color.fromARGB(255, 255, 98, 0), width: 2),
               ),
-              child: CircleAvatar(
+              child: const CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Icon(Icons.person, color: Color.fromARGB(255, 255, 98, 0)),
               ),
@@ -56,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(30),
                     borderSide: BorderSide.none,
                   ),
-                  prefixIcon: Icon(Icons.search, color: Colors.grey),
+                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
                 ),
               ),
             ),
@@ -67,22 +69,22 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: [
                   _buildChip('Appartements'),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   _buildChip('Chambres'),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   _buildChip('Studio'),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   _buildChip('Bureau'),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   _buildChip('Terrain'),
                 ],
               ),
             ),
           ),
           SliverPadding(
-            padding: EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 20),
             sliver: SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 0.6,
                 crossAxisSpacing: 2,
@@ -96,8 +98,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-
- bottomNavigationBar: CustomBottomNavBar(currentIndex: 0),
+      bottomNavigationBar: CustomBottomNavBar(currentIndex: 0),
     );
   }
 
@@ -114,12 +115,10 @@ class _HomePageState extends State<HomePage> {
           label,
           style: TextStyle(color: isSelected ? Colors.white : Colors.grey),
         ),
-        backgroundColor: isSelected
-            ? Color.fromARGB(255, 255, 98, 0)
-            : Colors.grey.withOpacity(0.3),
+        backgroundColor: isSelected ? const Color.fromARGB(255, 255, 98, 0) : Colors.grey.withOpacity(0.3),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: Colors.transparent, width: 1),
+          side: const BorderSide(color: Colors.transparent, width: 1),
         ),
       ),
     );
@@ -127,19 +126,23 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildPropertyCard() {
     return Card(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       child: SizedBox(
         width: 90,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset('assets/maison.jpg',width: 150,height: 100,),
+            Image.asset(
+              'assets/maison.jpg',
+              width: 150,
+              height: 100,
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(Icons.location_on, size: 16, color: Colors.grey),
@@ -153,8 +156,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  Text('70 000 Fcfa', style: TextStyle(color: Color.fromARGB(255, 255, 98, 0))),
-                  Text('Appartement Meublé'),
+                  const Text('70 000 Fcfa', style: TextStyle(color: Color.fromARGB(255, 255, 98, 0))),
+                  const Text('Appartement Meublé'),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -162,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                       _buildFeatureColumn(Icons.bed, '02', 'chambres'),
                       _buildFeatureColumn(Icons.kitchen, '01', 'cuisines'),
                     ],
-                 ),
+                  ),
                 ],
               ),
             ),
@@ -176,10 +179,13 @@ class _HomePageState extends State<HomePage> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 24, color: Color.fromARGB(255, 255, 98, 0)),
-        SizedBox(height: 4),
-        Text(count, style: TextStyle(fontSize: 16,)),
-        Text(label, style: TextStyle(fontSize: 12)),
+        Icon(icon, size: 24, color: const Color.fromARGB(255, 255, 98, 0)),
+        const SizedBox(height: 4),
+        Text(count,
+            style: const TextStyle(
+              fontSize: 16,
+            )),
+        Text(label, style: const TextStyle(fontSize: 12)),
       ],
     );
   }

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:myappfinal/publishPage.dart';
+
 class PublishPage extends StatelessWidget {
+  const PublishPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Publier une annonce'),
+        title: const Text('Publier une annonce'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Contenu de la page de publication'),
       ),
     );
